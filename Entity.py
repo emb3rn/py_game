@@ -10,7 +10,8 @@ class C_Entity():
 
     def move(self, x, y):
         #TODO: Change the self.pos instead and cast the self.pos to an int, which will allow for float values for the position, hence deltaTime. #2
-        self.rect = self.rect.move(x, y)
+        if (self.rect.x + x > 0 and self.rect.x + x < self.WINDOW_SIZE.x) and (self.rect.y + y > 0 and self.rect.y + y < self.WINDOW_SIZE.y):
+            self.rect = self.rect.move(x, y)
    
     def closest_entity(self, ent_list):
         smallest_distance = float('inf')

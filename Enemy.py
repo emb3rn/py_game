@@ -2,8 +2,8 @@ import pygame
 from Entity import C_Entity
 
 class C_Enemy(C_Entity):
-    def __init__(self, size):
-        super().__init__(size)
+    def __init__(self, size, window_size):
+        super().__init__(size, window_size)
         self.color = "red"
 
     def move_to_player(self, player, structure_array):

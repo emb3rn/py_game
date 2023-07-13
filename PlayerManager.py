@@ -2,15 +2,16 @@ import pygame
 from Player import C_Player
 
 class C_PlayerManager():
-    def __init__(self, screen, entity_size):
+    def __init__(self, screen, entity_size, window_size, building_grid):
         self.screen = screen
         self.ENTITY_SIZE = entity_size
+        self.WINDOW_SIZE = window_size
+        self.building_grid = building_grid
         self.player_list = []
-        self.building_grid = []
 
     def init_player(self, amount):
         for x in range(0, amount):
-           self.player_list.append(C_Player(self.ENTITY_SIZE))
+           self.player_list.append(C_Player(self.ENTITY_SIZE, self.WINDOW_SIZE, self.building_grid))
 
     def move_players(self, event):
         for player in self.player_list:

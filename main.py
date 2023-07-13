@@ -14,13 +14,15 @@ screen = pygame.display.set_mode((WINDOW_SIZE.x, WINDOW_SIZE.y))
 clock = pygame.time.Clock()
 running = True
 
-PlayerManager = C_PlayerManager()
-PlayerManager.init_player(1)
-
-MapManager = C_MapManager()
+MapManager = C_MapManager(WINDOW_SIZE, screen, []) #TODO: Temporary array because I dont have global pointers yet, and player_list is initaliised in the next line
 MapManager.init_building_grid()
 
-EnemyManager = C_EnemyManager(screen, PlayerManager.player_list)
+PlayerManager = C_PlayerManager(screen, ENTITY_SIZE, WINDOW_SIZE, MapManager.structure_grid)
+PlayerManager.init_player(1)
+
+MapManager.player_list = PlayerManager.player_list #TODO: Remove this later with global pointers, related to TODO above.
+
+EnemyManager = C_EnemyManager(screen, ENTITY_SIZE, PlayerManager.player_list, WINDOW_SIZE)
 EnemyManager.init_enemy(100)
 
 while running == True:
@@ -39,7 +41,7 @@ while running == True:
 
     screen.fill("dark green")
 
-    EnemyManager.random_movement(2)
+    EnemyManager.random_movement(1)
     EnemyManager.move_to_player(MapManager.structure_grid)
 
     EnemyManager.render_enemies()
